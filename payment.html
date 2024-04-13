@@ -1,0 +1,161 @@
+<!-- paymentPage.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment for Your Software</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 30px 0;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+            display: block;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        .price-bar {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        footer {
+            margin-bottom: 40px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Payment for Your Software</h1>
+    </header>
+
+    <section>
+        <h2>Secure Payment</h2>
+        <div class="payment-form">
+            <label for="software-dropdown">Select Software</label>
+            <select id="software-dropdown" onchange="updateTotalPrice()">
+                <option value="wifiMasterPro" data-price="4.99">WiFi Master Pro</option>
+                <option value="soilFTP" data-price="2.99">soilFTP</option>
+                <option value="soilCapture" data-price="9.99">soilCapture</option>
+                <!-- Add more software options as needed -->
+            </select>
+
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="Enter your card number">
+
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" placeholder="MM/YY">
+
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="CVV">
+
+            <button onclick="processPayment()">Make Payment</button>
+        </div>
+    </section>
+
+    <div class="price-bar" id="price-bar">Total Price: $0.00</div>
+
+    <footer>
+        <p>Contact us at: support@yoursoftware.com | Follow us on Twitter: @yoursoftware</p>
+    </footer>
+
+    <script>
+        function updateTotalPrice() {
+            const selectedSoftware = document.getElementById('software-dropdown');
+            const selectedOption = selectedSoftware.options[selectedSoftware.selectedIndex];
+            const softwarePrice = parseFloat(selectedOption.getAttribute('data-price'));
+            
+            const priceBar = document.getElementById('price-bar');
+            priceBar.textContent = `Total Price: $${softwarePrice.toFixed(2)}`;
+        }
+
+        function processPayment() {
+            const selectedSoftware = document.getElementById('software-dropdown').value;
+            const priceBar = document.getElementById('price-bar');
+            const totalPrice = priceBar.textContent.split('$')[1];
+            alert(`Payment processed successfully for ${selectedSoftware}!\nTotal Price: $${totalPrice}`);
+        }
+    </script>
+
+</body>
+</html>
